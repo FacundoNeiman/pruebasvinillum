@@ -21,7 +21,7 @@ async function searchTrack() {
           const audioUrl = track.preview;
           const trackTitle = track.title;
           const imageUrl = album.cover;
-
+        console.log(imageUrl);
           // Actualiza el reproductor y el título
           document.getElementById('audioPlayer').src = audioUrl;
           document.getElementById('trackTitle').textContent = trackTitle;
