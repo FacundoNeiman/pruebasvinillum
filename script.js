@@ -20,7 +20,7 @@ async function searchTrack() {
           const album = track.album;
           const audioUrl = track.preview;
           const trackTitle = track.title;
-          const imageUrl = album.cover;
+          const imageUrl = album.cover_big;
       
           // Actualiza el reproductor y el título
           document.getElementById('audioPlayer').src = audioUrl;
