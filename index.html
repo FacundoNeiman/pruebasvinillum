@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba API Deezer</title>
+  </head>
+  <body>
+    <h1>Busca una canción en Deezer</h1>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Ingrese el título de la canción"
+    />
+    
+    <button onclick="searchTrack()">Buscar</button>
+
+    <div id="trackInfo">
+      <h2 id="trackTitle"></h2>
+      <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
