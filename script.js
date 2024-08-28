@@ -17,12 +17,15 @@ async function searchTrack() {
       
       if (result.data.length > 0) {
           const track = result.data[0];  // Obtén la primera canción encontrada
+          const album = track.album;
           const audioUrl = track.preview;
           const trackTitle = track.title;
+          const imageUrl = album.cover;
 
           // Actualiza el reproductor y el título
           document.getElementById('audioPlayer').src = audioUrl;
           document.getElementById('trackTitle').textContent = trackTitle;
+          document.getElementById('albumImg').src = imageUrl;
       } else {
           alert("No se encontraron canciones.");
       }
