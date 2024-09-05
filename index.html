@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prueba API Deezer</title>
+    <title>Vinillum</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Busca una canción en Deezer</h1>
@@ -14,13 +15,16 @@
       placeholder="Ingrese el título de la canción"
     />
     
-    <button onclick="searchTrack()">Buscar</button>
-
     <input
     type="number"
     id="limitInput"
     placeholder="Canciones a buscar"
+    min="1"
   />
+
+
+    <button onclick="searchTrack()">Buscar</button>
+
 
 
 
