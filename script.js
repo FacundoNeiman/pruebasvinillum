@@ -9,28 +9,52 @@ const options = {
 // Función para buscar la canción
 async function searchTrack() {
   const query = document.getElementById('searchInput').value;
-  const searchUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(query)}`;
+  const limitNumber = parseInt(document.getElementById('limitInput').value) || 10;
+  const searchUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(query)}&limit=${limitNumber}`;
 
   try {
       const response = await fetch(searchUrl, options);
       const result = await response.json();
-      
-      if (result.data.length > 0) {
-          const track = result.data[0];  // Obtén la primera canción encontrada
-          const album = track.album;
-          const audioUrl = track.preview;
-          const trackTitle = track.title;
-          const imageUrl = album.cover_big;
-      
-          // Actualiza el reproductor y el título
-          document.getElementById('audioPlayer').src = audioUrl;
-          document.getElementById('trackTitle').textContent = trackTitle;
-          document.getElementById('albumImg').src = imageUrl;
-          console.log(imageUrl);
-          alert("funca e log")
-      } else {
-          alert("No se encontraron canciones.");
+
+      const tracksList = document.getElementById('tracksList');
+      tracksList.innerHTML = '';
+      const limitNumber = document.getElementById('limitInput').value;
+
+      if (result.data.length == 0) {
+        alert("No se encontraron canciones.");
+        tracksList.innerHTML = '<p>No se encontraron canciones.</p>';
       }
+      else{
+
+        result.data.forEach(item => {
+            // Crear un contenedor para cada canción
+            const trackDiv = document.createElement('div');
+            trackDiv.className = 'track-item';
+    
+            // Crear el elemento para el título
+            const title = document.createElement('h2');
+            title.textContent = item.title;
+            trackDiv.appendChild(title);
+    
+            // Crear el elemento para la imagen del álbum
+            const albumImg = document.createElement('img');
+            albumImg.src = item.album.cover_big;
+            albumImg.alt = `Portada del álbum ${item.album.title}`;
+            albumImg.style.maxWidth = '200px'; // Opcional: ajustar tamaño
+            trackDiv.appendChild(albumImg);
+    
+            // Crear el reproductor de audio
+            const audioPlayer = document.createElement('audio');
+            audioPlayer.controls = true;
+            audioPlayer.src = item.preview;
+            trackDiv.appendChild(audioPlayer);
+    
+            // Agregar el contenedor al contenedor principal
+            tracksList.appendChild(trackDiv);
+          });
+      
+    } 
+         
   } catch (error) {
       console.error(error);
   }

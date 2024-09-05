@@ -16,11 +16,15 @@
     
     <button onclick="searchTrack()">Buscar</button>
 
-    <div id="trackInfo">
-      <h2 id="trackTitle"></h2>
-      <img id="albumImg">
-      <audio id="audioPlayer" controls></audio>
-    </div>
+    <input
+    type="number"
+    id="limitInput"
+    placeholder="Canciones a buscar"
+  />
+
+
+
+    <div id="tracksList"></div>
 
     <script src="script.js"></script>
   </body>
