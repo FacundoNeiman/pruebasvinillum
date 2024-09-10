@@ -9,7 +9,7 @@ const options = {
 // Función para buscar la canción
 async function searchTrack() {
   const query = document.getElementById('searchInput').value;
-  const limitNumber = parseInt(document.getElementById('limitInput').value) || 10;
+  const limitNumber = parseInt(document.getElementById('limitInput').value) || 20;
   const searchUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${encodeURIComponent(query)}&limit=${limitNumber}`;
 
   try {
@@ -18,22 +18,22 @@ async function searchTrack() {
 
       const tracksList = document.getElementById('tracksList');
       tracksList.innerHTML = '';
-      const limitNumber = document.getElementById('limitInput').value;
 
-      if (result.data.length == 0) {
+      if (result.data.length === 0) {
         alert("No se encontraron canciones.");
         tracksList.innerHTML = '<p>No se encontraron canciones.</p>';
-      }
-      else{
-
+      } else {
         result.data.forEach(item => {
             // Crear un contenedor para cada canción
             const trackDiv = document.createElement('div');
             trackDiv.className = 'track-item';
     
-            // Crear el elemento para el título
+            // Crear el elemento para el título y el enlace
             const title = document.createElement('h2');
-            title.textContent = item.title;
+            const link = document.createElement('a');
+            link.href = `trackInfo.html?id=${item.id}`;
+            link.textContent = item.title;
+            title.appendChild(link);
             trackDiv.appendChild(title);
     
             // Crear el elemento para la imagen del álbum
@@ -51,9 +51,8 @@ async function searchTrack() {
     
             // Agregar el contenedor al contenedor principal
             tracksList.appendChild(trackDiv);
-          });
-      
-    } 
+        });
+      }
          
   } catch (error) {
       console.error(error);
