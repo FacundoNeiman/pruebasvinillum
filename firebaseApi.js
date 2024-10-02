@@ -1,4 +1,4 @@
-import { registerUser } from './auth.js';
+import { registerUser } from './firebaseConfig.js';
 
 const emailInput = document.querySelector('#email');
 const passInput = document.querySelector('#pass');
