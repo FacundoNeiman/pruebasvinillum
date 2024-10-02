@@ -38,7 +38,6 @@ export async function registerUser(email, password) {
   export async function loginUser(email, password) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Usuario iniciado sesión:", userCredential.user);
       return userCredential.user;
     } catch (error) {
       console.error("Error en inicio de sesión:", error.message);
@@ -46,7 +45,14 @@ export async function registerUser(email, password) {
     }
   }
 
+  export async function logout() {
+    auth.signOut().then(function() {
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  }
+
 
   export function getUserLog() {
-      return auth.currentUser.email;
+      return auth;
   }
