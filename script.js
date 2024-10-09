@@ -52,6 +52,14 @@ async function searchTrack() {
   }
 }
 
+// Agregar evento para la tecla Enter
+document.getElementById('searchInput').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Evitar que se envíe un formulario si está dentro de uno
+    searchTrack();
+  }
+});
+
 // Función para obtener información del track
 async function fetchTrackInfo(id) {
   const url = `https://deezerdevs-deezer.p.rapidapi.com/track/${id}`;
