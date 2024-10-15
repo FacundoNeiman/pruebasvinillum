@@ -28,7 +28,7 @@ async function searchTrack() {
         
         const title = document.createElement('h2');
         const link = document.createElement('a');
-        link.href = `trackInfo.html?id=${item.id}`;
+        link.href = `../TrackInfo/trackInfo.html?id=${item.id}`;
         link.textContent = item.title;
         title.appendChild(link);
         trackDiv.appendChild(title);
