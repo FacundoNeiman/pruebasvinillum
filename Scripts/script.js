@@ -53,10 +53,20 @@ async function searchTrack() {
 }
 
 // Agregar evento para la tecla Enter
-document.getElementById('searchInput').addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault(); // Evitar que se envíe un formulario si está dentro de uno
-    searchTrack();
+document.addEventListener('DOMContentLoaded', () => {
+  // Agregar evento para la tecla Enter
+  document.getElementById('searchInput').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Evitar que se envíe un formulario si está dentro de uno
+      searchTrack();
+    }
+  });
+
+  // Lógica para cargar información de track al inicio
+  const urlParams = new URLSearchParams(window.location.search);
+  const trackId = urlParams.get('id');
+  if (trackId) {
+    fetchTrackInfo(trackId);
   }
 });
 
@@ -70,14 +80,14 @@ async function fetchTrackInfo(id) {
     document.getElementById('trackTitle').textContent = track.title;
     const trackDetails = document.getElementById('trackDetails');
     trackDetails.innerHTML = `
-      <p><strong>Artista:</strong> <a href="${track.artist.link}" target="_blank">${track.artist.name}</a></p>
-      <p><strong>Álbum:</strong> <a href="${track.album.link}" target="_blank">${track.album.title}</a></p>
-      <p><strong>Duración:</strong> ${Math.floor(track.duration / 60)}:${track.duration % 60}</p>
-      <p><strong>Fecha de Lanzamiento:</strong> ${track.release_date}</p>
-      <p><strong>Enlace a la Canción:</strong> <a href="${track.link}" target="_blank">Escuchar</a></p>
-      <audio controls src="${track.preview}">Vista previa</audio>
-      <img src="${track.album.cover_big}" alt="Portada del Álbum">
-    `;
+    <p><strong>Artista:</strong> <a href="${track.artist.link}" target="_blank">${track.artist.name}</a></p>
+    <p><strong>Álbum:</strong> <a href="${track.album.link}" target="_blank">${track.album.title}</a></p>
+    <p><strong>Duración:</strong> ${Math.floor(track.duration / 60)}:${track.duration % 60}</p>
+    <p><strong>Fecha de Lanzamiento:</strong> ${track.release_date}</p>
+    <p><strong>Enlace a la Canción:</strong> <a href="${track.link}" target="_blank">Escuchar</a></p>
+    <audio controls src="${track.preview}">Vista previa</audio>
+    <img src="${track.album.cover_big}" alt="Portada del Álbum">
+`;
   } catch (error) {
     console.error(error);
     document.getElementById('trackDetails').innerHTML = '<p>No se pudo obtener la información del track.</p>';

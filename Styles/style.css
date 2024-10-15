@@ -97,3 +97,10 @@ body {
     justify-content: center;
     align-items: center;
   }
+  .track-info img {
+    width: 200px; /* Ajusta el ancho como prefieras */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block;
+    margin: 20px auto; /* Centra la imagen */
+    border-radius: 8px; /* Opcional: bordes redondeados */
+}
