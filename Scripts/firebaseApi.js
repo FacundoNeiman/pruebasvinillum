@@ -14,7 +14,7 @@ const clearInputs = () => {
 };
 
 // Verificar el estado de autenticación al cargar
-onAuthStateChanged(getUserLog(), (user) => {
+onAuthStateChanged(getUserLog(), user => {
     if (user) {
         console.log("logueado:", user.email);
     }
@@ -25,10 +25,10 @@ loginBtn.addEventListener('click', async () => {
     const password = passInput.value;
 
     // Verificar si hay un usuario ya logueado antes de intentar iniciar sesión
-    const user = getUserLog().currentUser;
-    if (user) {
-        console.log("Ya estás logueado", user.email);
-        alert("Ya estás logueado como " + user.email);
+    const currentUser = getUserLog().currentUser;
+    if (currentUser) {
+        console.log("Ya estás logueado", currentUser.email);
+        alert("Ya estás logueado como " + currentUser.email);
         return; 
     }
 
@@ -54,21 +54,16 @@ registerBtn.addEventListener('click', async () => {
     }
 });
 
-logoutBtn.addEventListener('click', () => {
-    logout()
-        .then(() => {
-            alert('Sesión cerrada correctamente');
-        })
-        .catch((error) => {
-            alert('Error al cerrar sesión: ' + error.message);
-        });
+logoutBtn.addEventListener('click', async () => {
+    try {
+        await logout();
+        alert('Sesión cerrada correctamente');
+    } catch (error) {
+        alert('Error al cerrar sesión: ' + error.message);
+    }
 });
 
 statusBtn.addEventListener('click', () => {
-    const user = getUserLog().currentUser;
-    if (user) {
-        console.log("Usuario actual:", user.email);
-    } else {
-        console.log("No hay usuario logueado");
-    }
+    const currentUser = getUserLog().currentUser;
+    console.log(currentUser ? "Usuario actual:" + currentUser.email : "No hay usuario logueado");
 });
